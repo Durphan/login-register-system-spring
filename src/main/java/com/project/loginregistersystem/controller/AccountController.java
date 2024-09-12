@@ -40,7 +40,7 @@ public class AccountController {
 
     private ResponseEntity<?> validatePassword(Account account) {
         if (account.getPassword().length() < 8) {
-            return ResponseEntity.status(300).body("Password must be at least 8 characters");
+            return ResponseEntity.status(400).body("Password must be at least 8 characters");
         }
         return null;
 
