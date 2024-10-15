@@ -5,14 +5,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.project.loginregistersystem.Model.Account;
+import com.project.loginregistersystem.model.Account;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
-    @Query(value = "CALL ADDACCOUNT(:username, :password)", nativeQuery = true)
-    void saveAccount(@Param("username") String username, @Param("password") String password);
+    @Query(value = "SELECT EXISTS(SELECT 1 FROM ACCOUNT WHERE USERNAME = :username)", nativeQuery = true)
+    boolean existsByUsername(@Param("username") String username);
 
-    @Query(value = "SELECT LOGINACCOUNT(:username, :password)", nativeQuery = true)
-    int loginAccount(@Param("username") String username, @Param("password") String password);
+    @Query(value = "SELECT IDUSER, USERNAME, PASSWORD, DATE_CREATED FROM ACCOUNT WHERE USERNAME = :username", nativeQuery = true)
+    Account findByUsername(@Param("username") String username);
 }

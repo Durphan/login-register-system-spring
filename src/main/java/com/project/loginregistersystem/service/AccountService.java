@@ -1,9 +1,9 @@
 package com.project.loginregistersystem.service;
 
-import com.project.loginregistersystem.Model.Account;
+import com.project.loginregistersystem.model.Account;
 
 public interface AccountService {
     void saveAccount(Account account);
 
-    int loginAccount(Account account);
+    Boolean loginAccount(Account account);
 }
